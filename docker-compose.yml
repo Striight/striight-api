@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:15.2-alpine
+    environment:
+      - POSTGRES_PASSWORD=workdb123!
+      - POSTGRES_USER=striight
+    #    restart: no
+    ports:
+      - '5434:5432'

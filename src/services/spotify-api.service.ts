@@ -22,7 +22,7 @@ export default class SpotifyApiService {
     this.spotifyWebApi = new SpotifyWebApi({
       clientId: spotifyCredentials.clientId,
       clientSecret: spotifyCredentials.secret,
-      redirectUri: `http://localhost:3000/${SPOTIFY_CALLBACK}`,
+      redirectUri: `http://localhost:4000/${SPOTIFY_CALLBACK}`,
     });
     this.init();
   }
@@ -52,7 +52,8 @@ export default class SpotifyApiService {
           this.configService.get('SPOTIFY_TOKEN_SECRET'),
         );
         this.spotifyWebApi.setRefreshToken(decoded);
-        await this.spotifyWebApi.refreshAccessToken();
+        const { body } = await this.spotifyWebApi.refreshAccessToken();
+        this.spotifyWebApi.setAccessToken(body.access_token);
       }
     });
   }
@@ -84,7 +85,13 @@ export default class SpotifyApiService {
   }
 
   public async doWhatever() {
-    await this.createPlaylist('toto');
+    const { body } = await this.spotifyWebApi.getTrack(
+      '2qqPOFjYjwGuJhCj3tnIkx',
+    );
+    const { body: bodyArtist } = await this.spotifyWebApi.getArtist(
+      body.artists[0].id,
+    );
+    console.log(bodyArtist);
     // const { body } = await this.spotifyWebApi.searchTracks('Love Yourself');
     // console.log(body.tracks.items[0]);
   }

@@ -1,11 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { v4 } from 'uuid';
 import crypto from 'crypto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export default class CryptoService {
+  constructor(private configService: ConfigService) {}
+
   private readonly algorythm = 'aes-256-ctr';
-  private readonly iv = crypto.randomBytes(16);
+  private readonly iv = Buffer.from(
+    this.configService.get('ENCRYPTION_KEY') as string,
+    'utf-8',
+  ).slice(0, 16);
 
   private getKey(secret: string) {
     return Buffer.from(secret, 'utf8').slice(0, 32);

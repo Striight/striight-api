@@ -1,7 +1,8 @@
 import SpotifyAccountConfig from './spotify-account-config';
+import ArtistAccount from './artist-account';
 
-export { SpotifyAccountConfig };
+export { SpotifyAccountConfig, ArtistAccount };
 
-const entities = [SpotifyAccountConfig];
+const entities = [SpotifyAccountConfig, ArtistAccount];
 
 export default entities;

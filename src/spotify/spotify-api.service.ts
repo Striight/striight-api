@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { v4 } from 'uuid';
 import SpotifyWebApi from 'spotify-web-api-node';
-import SecretsService from './secrets.service';
-import CryptoService from './crypto.service';
+import SecretsService from '../core/services/secrets.service';
+import CryptoService from '../core/services/crypto.service';
 import { ConfigService } from '@nestjs/config';
 import { SPOTIFY_CALLBACK } from '../constants/spotify';
-import SpotifyAccountConfigRepository from '../repositories/spotify-account-config.repository';
+import SpotifyAccountConfigRepository from './spotify-account-config.repository';
 import { SpotifyAccountConfig } from '../entities';
 
 @Injectable()
@@ -42,6 +42,7 @@ export default class SpotifyApiService {
           this.SECRET_CODE,
           true,
         );
+        console.log('Authentication required');
         console.log(url);
       } else {
         const accountConfig = (
@@ -58,6 +59,14 @@ export default class SpotifyApiService {
     });
   }
 
+  /**
+   * This is the callback used to save the spotify account refresh token.
+   * Before saving it in the db, we make sure that the account is actually the right one (the one that belongs to us)
+   * If it's not, then we throw an error.
+   * While saving the token to the db, we encrypt it to avoid people using it if we're being hacked.
+   * @param code
+   * @param state
+   */
   public async registerToken(code: string, state: string) {
     if (state !== this.SECRET_CODE) {
       throw new Error('Invalid code');
@@ -67,6 +76,12 @@ export default class SpotifyApiService {
     } = await this.spotifyWebApi.authorizationCodeGrant(code);
     this.spotifyWebApi.setAccessToken(access_token);
     this.spotifyWebApi.setRefreshToken(refresh_token);
+    const currentUser = await this.spotifyWebApi.getMe();
+    if (currentUser.body.id !== this.configService.get('SPOTIFY_USER_ID')) {
+      this.spotifyWebApi.resetAccessToken();
+      this.spotifyWebApi.resetRefreshToken();
+      throw new Error('Wrong spotify account');
+    }
     const encryptedRefreshToken = this.cryptoService.encryptString(
       refresh_token,
       this.configService.get('SPOTIFY_TOKEN_SECRET'),
@@ -94,5 +109,10 @@ export default class SpotifyApiService {
     console.log(bodyArtist);
     // const { body } = await this.spotifyWebApi.searchTracks('Love Yourself');
     // console.log(body.tracks.items[0]);
+  }
+
+  public async getArtistById(artistId: string) {
+    const { body } = await this.spotifyWebApi.getArtist(artistId);
+    return body;
   }
 }

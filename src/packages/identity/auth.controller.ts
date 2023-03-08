@@ -10,7 +10,6 @@ export default class AuthController {
   @Post('/login')
   async login(@Request() req) {
     const { user } = req;
-    console.log(user);
     return {
       access_token: await this.usersService.signToken(user),
     };

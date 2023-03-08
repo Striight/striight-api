@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserPersonalDataModule } from './user-personal-data/user-personal-data.module';
 import entities from './entities';
-import SpotifyModule from './modules/spotify.module';
+import SpotifyModule from './spotify/spotify.module';
 import User from './packages/identity/user';
 import AuthModule from './packages/identity/auth.module';
-import ArtistAccountModule from './modules/artist-account.module';
+import ArtistAccountModule from './artist/artist-account.module';
 
 @Module({
   imports: [
@@ -28,8 +29,8 @@ import ArtistAccountModule from './modules/artist-account.module';
     SpotifyModule,
     AuthModule,
     ArtistAccountModule,
+    UserPersonalDataModule,
   ],
   controllers: [AppController],
-  providers: [],
 })
 export class AppModule {}

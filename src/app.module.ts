@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserPersonalDataModule } from './user-personal-data/user-personal-data.module';
 import entities from './entities';
 import SpotifyModule from './spotify/spotify.module';
 import User from './packages/identity/user';
@@ -29,7 +28,6 @@ import ArtistAccountModule from './artist/artist-account.module';
     SpotifyModule,
     AuthModule,
     ArtistAccountModule,
-    UserPersonalDataModule,
   ],
   controllers: [AppController],
 })

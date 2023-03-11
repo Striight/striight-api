@@ -1,4 +1,5 @@
 import { Column, Entity } from 'typeorm';
+import { defer } from 'rxjs';
 
 @Entity('users')
 export default class User {
@@ -25,4 +26,9 @@ export default class User {
     nullable: false,
   })
   public password: string;
+
+  @Column({
+    default: false,
+  })
+  public isAdmin: boolean;
 }

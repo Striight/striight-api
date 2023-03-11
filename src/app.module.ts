@@ -2,11 +2,15 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SpotifyPlaylistModule } from './spotify-playlist/spotify-playlist.module';
 import entities from './entities';
 import SpotifyModule from './spotify/spotify.module';
 import User from './packages/identity/user';
 import AuthModule from './packages/identity/auth.module';
 import ArtistAccountModule from './artist/artist-account.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './packages/identity/jwt-auth.guard';
+import { RolesGuard } from './core/guards/roles.guard';
 
 @Module({
   imports: [
@@ -28,7 +32,18 @@ import ArtistAccountModule from './artist/artist-account.module';
     SpotifyModule,
     AuthModule,
     ArtistAccountModule,
+    SpotifyPlaylistModule,
   ],
   controllers: [AppController],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}

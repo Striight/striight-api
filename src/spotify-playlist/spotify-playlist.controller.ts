@@ -1,10 +1,10 @@
-import { Controller, Post, UseGuards } from '@nestjs/common';
-import { RolesGuard } from '../core/guards/roles.guard';
+import { Controller, Post } from '@nestjs/common';
+import { Admin } from '../metadata/roles.metadata';
 
-@Controller('spotify-playlist')
+@Controller('playlist/spotify')
 export class SpotifyPlaylistController {
   @Post()
-  @UseGuards(RolesGuard)
+  @Admin()
   public createPlaylist() {
     return 'ok';
   }

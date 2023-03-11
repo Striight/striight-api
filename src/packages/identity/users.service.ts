@@ -24,6 +24,7 @@ export default class UsersService {
       {
         username: user.username,
         sub: user.userId,
+        isAdmin: user.isAdmin,
       },
       {
         secret: JWT_SECRET,

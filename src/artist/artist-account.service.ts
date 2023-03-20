@@ -17,7 +17,7 @@ export default class ArtistAccountService {
     try {
       const artist = await this.spotifyApiService.getArtistById(artistId);
       const inDb = await this.artistAccountRepository.findOneBy({
-        artistId,
+        spotifyId: artistId,
       });
       if (inDb && inDb.userId !== userId) {
         throw new Error('This artist is already linked to another account');
@@ -25,9 +25,11 @@ export default class ArtistAccountService {
       if (inDb) {
         throw new Error('This artist is already linked');
       }
-      await this.artistAccountRepository.save(
-        new ArtistAccount(userId, 'spotify', artist.id),
-      );
+
+      const artistAccount = new ArtistAccount(userId);
+      artistAccount.spotifyId = artist.id;
+
+      await this.artistAccountRepository.save(artistAccount);
     } catch (e) {
       console.error(e);
       throw new Error(e);

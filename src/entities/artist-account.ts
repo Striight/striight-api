@@ -1,13 +1,9 @@
 import { Column, Entity } from 'typeorm';
 
-export type STREAMING_SERVICE = 'spotify';
-
 @Entity()
 export default class ArtistAccount {
-  constructor(userId, streamingService: STREAMING_SERVICE, artistId) {
+  constructor(userId) {
     this.userId = userId;
-    this.streamingService = streamingService;
-    this.artistId = artistId;
   }
 
   @Column({
@@ -20,10 +16,5 @@ export default class ArtistAccount {
     nullable: false,
     primary: true,
   })
-  public streamingService: STREAMING_SERVICE;
-
-  @Column({
-    nullable: false,
-  })
-  public artistId: string;
+  public spotifyId: string;
 }

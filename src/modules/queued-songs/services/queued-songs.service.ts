@@ -7,6 +7,7 @@ import ArtistAccount from '@entities/artist-account';
 import { RuntimeException } from '@nestjs/core/errors/exceptions';
 import QueuedSong from '@entities/queued-song';
 import { SPOTIFY } from '@constants/platform';
+import SongsRepository from '@modules/songs/songs.repository';
 
 @Injectable()
 export class QueuedSongsService {
@@ -14,11 +15,13 @@ export class QueuedSongsService {
     private queuedSongsRepository: QueuedSongsRepository,
     private usersRepository: UsersRepository,
     private artistAccountRepository: ArtistAccountRepository,
+    private songsRepository: SongsRepository,
   ) {}
 
   private async queueSpotifySong(artist: ArtistAccount, songId: string) {
+    const song = await this.songsRepository.findOneBy({ id: songId });
     const queue = new QueuedSong();
-    queue.songId = songId;
+    queue.song = song;
     queue.userId = artist.user.id;
     queue.platform = SPOTIFY;
     //TODO pull the song and check if it's a premium song

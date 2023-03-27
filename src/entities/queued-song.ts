@@ -1,16 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Platform } from '@constants/platform';
+import Song from '@entities/song';
 
 @Entity('queued_songs')
 export default class QueuedSong {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({
-    nullable: false,
-    name: 'song_id',
-  })
-  songId: string;
+  @OneToOne(() => Song)
+  @JoinColumn({ name: 'song_id' })
+  song: Song;
 
   @Column({
     nullable: false,

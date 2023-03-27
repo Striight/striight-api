@@ -1,0 +1,22 @@
+src/
+  └─
+    ├─ config/                 # Global configuration
+    ├─ decorators/             # Custom decorators
+    ├─ exceptions/             # Custom exceptions and exception filters
+    ├─ guards/                 # Global guards
+    ├─ interceptors/           # Global interceptors
+    ├─ middlewares/            # Global middlewares
+    ├─ pipes/                  # Global pipes
+    ├─ utils/                  # Utility functions and shared code
+    ├─ modules/                # Main modules directory
+    │   ├─ <module-1>/         # Individual module folder
+    │   │   ├─ dto/            # Data transfer objects for the module
+    │   │   ├─ entities/       # TypeORM entities or other data models
+    │   │   ├─ interfaces/     # Interfaces specific to the module
+    │   │   ├─ services/       # Services for the module
+    │   │   ├─ <module-1>.controller.ts
+    │   │   └─ <module-1>.module.ts
+    │   └─ <module-2>/         # Another module folder (similar structure)
+    ├─ app.controller.ts       # Main app controller
+    ├─ app.module.ts           # Main app module
+    └─ main.ts                 # App entry point

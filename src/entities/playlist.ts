@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Platform } from '../constants/platform';
+import { Platform } from '@constants/platform';
 
 @Entity('playlists')
 export default class Playlist {

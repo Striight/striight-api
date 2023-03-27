@@ -17,6 +17,15 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@constants/*": ["src/constants/*"],
+      "@entities/*": ["src/entities/*"],
+      "@guards/*": ["src/guards/*"],
+      "@metadata/*": ["src/metadata/*"],
+      "@modules/*": ["src/modules/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   }
 }

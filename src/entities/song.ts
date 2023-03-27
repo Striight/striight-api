@@ -1,17 +1,16 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import ArtistAccount from '@entities/artist-account';
 
 @Entity('songs')
 export default class Song {
-  @Column({
-    nullable: false,
-    primary: true,
-    unique: true,
-    generated: 'uuid',
-  })
-  public userId: string;
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
+
+  @ManyToOne(() => ArtistAccount, (artistAccount) => artistAccount.songs)
+  artist: ArtistAccount;
 
   @Column({
     nullable: false,
   })
-  name: string;
+  uri: string;
 }

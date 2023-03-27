@@ -25,7 +25,8 @@
       "@guards/*": ["src/guards/*"],
       "@metadata/*": ["src/metadata/*"],
       "@modules/*": ["src/modules/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@exceptions/*": ["src/exceptions/*"]
     }
   }
 }

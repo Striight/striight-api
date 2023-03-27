@@ -2,14 +2,16 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './entities';
-import SpotifyModule from './modules/spotify/spotify.module';
-import AuthModule from './modules/auth/auth.module';
-import ArtistAccountModule from './modules/artist/artist-account.module';
+import SpotifyModule from '@modules/spotify/spotify.module';
+import AuthModule from '@modules/auth/auth.module';
+import ArtistAccountModule from '@modules/artist/artist-account.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from '@modules/auth/guards/jwt-auth.guard';
 import { RolesGuard } from '@guards/roles.guard';
 import { PlaylistModule } from '@modules/playlist/playlist.module';
-import CoreModule from './modules/core/core.module';
+import { QueuedSongsModule } from '@modules/queued-songs/queued-songs.module';
+import { SongsModule } from './modules/songs/songs.module';
+import CoreModule from '@modules/core/core.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import CoreModule from './modules/core/core.module';
     AuthModule,
     ArtistAccountModule,
     PlaylistModule,
+    QueuedSongsModule,
+    SongsModule,
   ],
   providers: [
     {

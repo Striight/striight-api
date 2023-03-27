@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
 export default class User {
@@ -7,13 +7,8 @@ export default class User {
     this.password = password;
   }
 
-  @Column({
-    nullable: false,
-    primary: true,
-    unique: true,
-    generated: 'uuid',
-  })
-  public userId: string;
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
 
   @Column({
     nullable: false,
@@ -28,6 +23,7 @@ export default class User {
 
   @Column({
     default: false,
+    name: 'is_admin',
   })
   public isAdmin: boolean;
 }

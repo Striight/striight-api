@@ -23,7 +23,7 @@ export default class UsersService {
     return this.jwtService.sign(
       {
         username: user.username,
-        sub: user.userId,
+        sub: user.id,
         isAdmin: user.isAdmin,
       },
       {

@@ -5,7 +5,6 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Platform } from '@constants/platform';
 import Song from '@entities/song';
 
 @Entity('queued_songs')
@@ -13,25 +12,15 @@ export default class QueuedSong {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => Song)
-  @JoinColumn({ name: 'song_id' })
-  song: Song;
-
-  @Column({
+  @OneToOne(() => Song, {
     nullable: false,
   })
-  platform: Platform;
+  @JoinColumn({ name: 'song_id' })
+  song: Song;
 
   @Column({
     nullable: false,
     name: 'user_id',
   })
   userId: string;
-
-  @Column({
-    nullable: false,
-    default: false,
-    name: 'is_premium',
-  })
-  isPremium: boolean;
 }

@@ -31,4 +31,10 @@ export default class Song {
     nullable: false,
   })
   name: string;
+
+  @Column({
+    name: 'is_premium',
+    default: false,
+  })
+  isPremium: boolean;
 }

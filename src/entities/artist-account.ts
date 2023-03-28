@@ -30,8 +30,11 @@ export default class ArtistAccount {
   })
   appleMusicId: string;
 
-  @ManyToOne(() => User, (user) => user.artists)
-  // @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, (user) => user.artists, {
+    nullable: false,
+    eager: true,
+  })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @OneToMany(() => Song, (song) => song.artist)

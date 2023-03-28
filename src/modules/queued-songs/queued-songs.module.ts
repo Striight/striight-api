@@ -10,9 +10,13 @@ import ArtistAccount from '@entities/artist-account';
 import ArtistAccountRepository from '@modules/artist/repositories/artist-account.repository';
 import Song from '@entities/song';
 import SongsRepository from '@modules/songs/songs.repository';
+import UsersModule from '@modules/user/users.module';
 
 @Module({
-  imports: [createTypeOrmModule([QueuedSong, User, ArtistAccount, Song])],
+  imports: [
+    createTypeOrmModule([QueuedSong, User, ArtistAccount, Song]),
+    UsersModule,
+  ],
   controllers: [QueuedSongsController],
   providers: [
     QueuedSongsService,

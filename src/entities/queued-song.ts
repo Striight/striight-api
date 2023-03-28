@@ -23,4 +23,10 @@ export default class QueuedSong {
     name: 'user_id',
   })
   userId: string;
+
+  @Column({
+    default: new Date(),
+    name: 'creation_date',
+  })
+  creationDate: Date;
 }

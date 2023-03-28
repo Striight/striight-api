@@ -11,6 +11,7 @@ import { RolesGuard } from '@guards/roles.guard';
 import { PlaylistModule } from '@modules/playlist/playlist.module';
 import { QueuedSongsModule } from '@modules/queued-songs/queued-songs.module';
 import { SongsModule } from './modules/songs/songs.module';
+import { SchedulerModule } from './modules/scheduler/scheduler.module';
 import CoreModule from '@modules/core/core.module';
 
 @Module({
@@ -37,6 +38,7 @@ import CoreModule from '@modules/core/core.module';
     PlaylistModule,
     QueuedSongsModule,
     SongsModule,
+    SchedulerModule,
   ],
   providers: [
     {

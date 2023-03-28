@@ -6,9 +6,15 @@ import { createTypeOrmModule } from '@utils/typeorm.utils';
 import ArtistAccount from '@entities/artist-account';
 import Song from '@entities/song';
 import SongsRepository from '@modules/songs/songs.repository';
+import SpotifyModule from '@modules/spotify/spotify.module';
+import UsersModule from '@modules/user/users.module';
 
 @Module({
-  imports: [createTypeOrmModule([ArtistAccount, Song])],
+  imports: [
+    createTypeOrmModule([ArtistAccount, Song]),
+    SpotifyModule,
+    UsersModule,
+  ],
   providers: [SongsService, ArtistAccountRepository, SongsRepository],
   controllers: [SongsController],
 })

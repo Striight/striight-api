@@ -6,7 +6,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Platform } from '@constants/platform';
 import Song from '@entities/song';
 import User from '@entities/user';
 
@@ -20,21 +19,19 @@ export default class ArtistAccount {
   public id: string;
 
   @Column({
-    nullable: false,
+    name: 'spotify_id',
+    nullable: true,
   })
-  @Column({
-    nullable: false,
-  })
-  platform: Platform;
+  spotifyId: string;
 
   @Column({
-    nullable: false,
-    name: 'platform_id',
+    name: 'apple_music_id',
+    nullable: true,
   })
-  public platformId: string;
+  appleMusicId: string;
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => User, (user) => user.artists)
+  // @JoinColumn({ name: 'user_id' })
   user: User;
 
   @OneToMany(() => Song, (song) => song.artist)

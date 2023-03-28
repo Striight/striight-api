@@ -19,6 +19,12 @@ export default class UsersService {
     });
   }
 
+  async findById(userId: string): Promise<User | undefined> {
+    return this.usersRepository.findOneBy({
+      id: userId,
+    });
+  }
+
   async signToken(user: User) {
     return this.jwtService.sign(
       {

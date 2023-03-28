@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import ArtistAccount from '@entities/artist-account';
 
 @Entity('users')
 export default class User {
@@ -26,4 +27,7 @@ export default class User {
     name: 'is_admin',
   })
   public isAdmin: boolean;
+
+  @OneToMany(() => ArtistAccount, (account) => account.user)
+  public artists: Promise<ArtistAccount[]>;
 }

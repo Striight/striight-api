@@ -99,6 +99,15 @@ export default class SpotifyApiService {
     }
   }
 
+  public async getSongIfRightArtist(songId: string, artistId: string) {
+    const { body: artist } = await this.spotifyWebApi.getArtist(artistId);
+    const { body: song } = await this.spotifyWebApi.getTrack(songId);
+    if (song.artists.some(({ id }) => id === artist.id)) {
+      return song;
+    }
+    return null;
+  }
+
   public async doWhatever() {
     const { body } = await this.spotifyWebApi.getTrack(
       '2qqPOFjYjwGuJhCj3tnIkx',

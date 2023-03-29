@@ -7,8 +7,8 @@ import { ConfigService } from '@nestjs/config';
 import { SPOTIFY_CALLBACK } from '@constants/spotify';
 import SpotifyAccountConfigRepository from '../repositories/spotify-account-config.repository';
 import SpotifyAccountConfig from '@entities/spotify-account-config';
-import NoArtistException from '@exceptions/SpotifyNotInitialised.exception';
 import SpotifyNotInitialisedException from '@exceptions/SpotifyNotInitialised.exception';
+import { RuntimeException } from '@nestjs/core/errors/exceptions';
 
 @Injectable()
 export default class SpotifyApiService {
@@ -57,6 +57,7 @@ export default class SpotifyApiService {
         this.spotifyWebApi.setRefreshToken(decoded);
         const { body } = await this.spotifyWebApi.refreshAccessToken();
         this.spotifyWebApi.setAccessToken(body.access_token);
+        this.initialized = true;
       }
     });
   }
@@ -97,13 +98,20 @@ export default class SpotifyApiService {
     await this.spotifyAccountConfigRepository.save(
       new SpotifyAccountConfig(encryptedRefreshToken),
     );
+    this.initialized = true;
   }
 
   public async createPlaylist(name: string) {
+    this.initialisedOrThrow();
     try {
-      await this.spotifyWebApi.createPlaylist(name);
+      return (
+        await this.spotifyWebApi.createPlaylist(name, {
+          public: true,
+          description: 'Every week, discover new songs made by small talents!',
+        })
+      ).body;
     } catch (err) {
-      console.log(err);
+      throw new RuntimeException(err);
     }
   }
 

@@ -10,13 +10,15 @@ import { JwtAuthGuard } from '@modules/auth/guards/jwt-auth.guard';
 import { RolesGuard } from '@guards/roles.guard';
 import { PlaylistModule } from '@modules/playlist/playlist.module';
 import { QueuedSongsModule } from '@modules/queued-songs/queued-songs.module';
-import { SongsModule } from './modules/songs/songs.module';
-import { SchedulerModule } from './modules/scheduler/scheduler.module';
+import { SongsModule } from '@modules/songs/songs.module';
+import { SchedulerModule } from '@modules/scheduler/scheduler.module';
 import CoreModule from '@modules/core/core.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({

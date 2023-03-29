@@ -1,10 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Platform } from '@constants/platform';
 
 @Entity('playlists')
 export default class Playlist {
-  constructor(platform: Platform, genre: string) {
-    this.platform = platform;
+  constructor(genre: string) {
     this.genre = genre;
   }
 
@@ -12,9 +10,9 @@ export default class Playlist {
   id: number;
 
   @Column({
-    nullable: false,
+    name: 'spotify_id',
   })
-  platform: Platform;
+  spotifyId: string;
 
   @Column({
     nullable: false,
@@ -31,4 +29,7 @@ export default class Playlist {
     default: 'en',
   })
   language: string;
+
+  @Column()
+  name: string;
 }

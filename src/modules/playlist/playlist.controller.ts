@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { Admin } from '@metadata/roles.metadata';
 import { PlaylistService } from './services/playlist.service';
-import { Platform } from '@constants/platform';
+import CreatePlaylistDto from '@modules/playlist/dto/create-playlist-dto';
 
 @Controller('playlist')
 export class PlaylistController {
@@ -9,8 +9,8 @@ export class PlaylistController {
 
   @Post()
   @Admin()
-  createPlaylist(@Body() body: { genre: string; platform: Platform }) {
-    const { genre, platform } = body;
-    this.playlistService.createPlaylist(platform, genre);
+  createPlaylist(@Body() body: CreatePlaylistDto) {
+    const { genre, name } = body;
+    return this.playlistService.createPlaylist(genre, name);
   }
 }

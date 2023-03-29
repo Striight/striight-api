@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import ArtistAccountRepository from '../repositories/artist-account.repository';
 import SpotifyApiService from '../../spotify/services/spotify-api.service';
 import ArtistAccount from '@entities/artist-account';
@@ -27,10 +27,13 @@ export default class ArtistAccountService {
         spotifyId: artistId,
       });
       if (inDb && inDb.user.id !== userId) {
-        throw new Error('This artist is already linked to another account');
+        throw new HttpException(
+          'This artist is already linked to another account',
+          400,
+        );
       }
       if (inDb) {
-        throw new Error('This artist is already linked');
+        throw new HttpException('This artist is already linked', 400);
       }
 
       const artistAccount = new ArtistAccount(user);

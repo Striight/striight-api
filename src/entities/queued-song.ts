@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import Song from '@entities/song';
+import { PENDING, Status } from '@constants/queued-song-status';
 
 @Entity('queued_songs')
 export default class QueuedSong {
@@ -29,4 +30,9 @@ export default class QueuedSong {
     name: 'creation_date',
   })
   creationDate: Date;
+
+  @Column({
+    default: PENDING,
+  })
+  status: Status;
 }

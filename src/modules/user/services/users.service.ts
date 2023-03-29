@@ -1,12 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import User from '@entities/user';
 import UsersRepository from '../repositories/users.repository';
 import { PasswordService } from '@modules/core/services/password.service';
 import { JwtService } from '@nestjs/jwt';
 import { JWT_SECRET } from '@constants/jwt';
+import UserException, { USER_ALREADY_EXISTS } from '@exceptions/UserException';
 
 @Injectable()
 export default class UsersService {
+  private readonly logger = new Logger(UsersService.name);
+
   constructor(
     private usersRepository: UsersRepository,
     private passwordService: PasswordService,
@@ -37,11 +40,14 @@ export default class UsersService {
       },
     );
   }
-
   async registerUser(
     username: string,
     password: string,
   ): Promise<{ access_token: string }> {
+    if (!!(await this.findByUsername(username))) {
+      this.logger.error(USER_ALREADY_EXISTS);
+      throw new UserException(USER_ALREADY_EXISTS);
+    }
     const user = await this.usersRepository.save(
       new User(username, await this.passwordService.hashPassword(password)),
     );

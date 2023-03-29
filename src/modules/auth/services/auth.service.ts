@@ -14,6 +14,7 @@ export default class AuthService {
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findByUsername(username);
     if (
+      user == null ||
       !(await this.passwordService.verifyPassword(password, user?.password))
     ) {
       throw new UnauthorizedException('Wrong credentials');

@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import ArtistAccountRepository from '../repositories/artist-account.repository';
 import SpotifyApiService from '../../spotify/services/spotify-api.service';
 import ArtistAccount from '@entities/artist-account';
-import { SPOTIFY } from '@constants/platform';
 import UsersRepository from '@modules/user/repositories/users.repository';
 import { extractSpotifyIdFromURI } from '@utils/song-uri.utils';
+import { Log } from '../../../log';
 
 @Injectable()
 export default class ArtistAccountService {
+  private readonly log = new Log(ArtistAccountService.name);
+
   constructor(
     private readonly artistAccountRepository: ArtistAccountRepository,
     private readonly spotifyApiService: SpotifyApiService,
@@ -36,8 +38,8 @@ export default class ArtistAccountService {
 
       await this.artistAccountRepository.save(artistAccount);
     } catch (e) {
-      console.error(e);
-      throw new Error(e);
+      this.log.error(e);
+      throw e;
     }
   }
 

@@ -7,6 +7,8 @@ import { ConfigService } from '@nestjs/config';
 import { SPOTIFY_CALLBACK } from '@constants/spotify';
 import SpotifyAccountConfigRepository from '../repositories/spotify-account-config.repository';
 import SpotifyAccountConfig from '@entities/spotify-account-config';
+import NoArtistException from '@exceptions/SpotifyNotInitialised.exception';
+import SpotifyNotInitialisedException from '@exceptions/SpotifyNotInitialised.exception';
 
 @Injectable()
 export default class SpotifyApiService {
@@ -59,6 +61,12 @@ export default class SpotifyApiService {
     });
   }
 
+  private initialisedOrThrow() {
+    if (!this.initialized) {
+      throw new SpotifyNotInitialisedException();
+    }
+  }
+
   /**
    * This is the callback used to save the spotify account refresh token.
    * Before saving it in the db, we make sure that the account is actually the right one (the one that belongs to us)
@@ -100,6 +108,7 @@ export default class SpotifyApiService {
   }
 
   public async getSongIfRightArtist(songId: string, artistId: string) {
+    this.initialisedOrThrow();
     const { body: artist } = await this.spotifyWebApi.getArtist(artistId);
     const { body: song } = await this.spotifyWebApi.getTrack(songId);
     if (song.artists.some(({ id }) => id === artist.id)) {
@@ -121,6 +130,7 @@ export default class SpotifyApiService {
   }
 
   public async getArtistById(artistId: string) {
+    this.initialisedOrThrow();
     const { body } = await this.spotifyWebApi.getArtist(artistId);
     return body;
   }

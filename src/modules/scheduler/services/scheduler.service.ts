@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
+import { Cron } from '@nestjs/schedule';
 
 const EVERY_WEEK_MONDAY_3AM = '0 3 * * 1';
 
@@ -12,4 +12,6 @@ export class SchedulerService {
   handlePlaylistsRefresh() {
     console.log('Hello CRON');
   }
+
+  private getNextSongsToPost() {}
 }

@@ -4,12 +4,17 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import RuntimeExceptionFilter from './filters/RuntimeExceptionFilter';
 import { HttpExceptionFilter } from './filters/HttpExceptionFilter';
-import { Log } from './log';
+import { DataSource } from 'typeorm';
+import { runSeedServices } from './seeds/platforms.seed';
+// import { Log } from './log';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: new Log(),
+    //TODO: Improve the logs as they don't show the stack traces
+    // logger: new Log(),
   });
+  const connection = app.get(DataSource);
+  await runSeedServices(connection);
 
   const config = new DocumentBuilder()
     .setTitle('Striight API')

@@ -5,9 +5,10 @@ import PlaylistRepository from './repositories/playlist.repository';
 import { createTypeOrmModule } from '@utils/typeorm.utils';
 import Playlist from '@entities/playlist';
 import SpotifyModule from '@modules/spotify/spotify.module';
+import { PlatformModule } from '@modules/platform/platform.module';
 
 @Module({
-  imports: [createTypeOrmModule([Playlist]), SpotifyModule],
+  imports: [createTypeOrmModule([Playlist]), SpotifyModule, PlatformModule],
   providers: [PlaylistService, PlaylistRepository],
   controllers: [PlaylistController],
 })

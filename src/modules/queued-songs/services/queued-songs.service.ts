@@ -43,7 +43,7 @@ export class QueuedSongsService {
     }
     const queue = new QueuedSong();
     queue.song = song;
-    queue.userId = user.id;
+    queue.user = user;
     await this.queuedSongsRepository.save(queue);
   }
 }

@@ -30,6 +30,11 @@ export default class ArtistAccount {
   })
   appleMusicId: string;
 
+  @Column({
+    nullable: false,
+  })
+  name: string;
+
   @ManyToOne(() => User, (user) => user.artists, {
     nullable: false,
     eager: true,

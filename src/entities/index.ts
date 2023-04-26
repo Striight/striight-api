@@ -4,6 +4,8 @@ import Playlist from './playlist';
 import Song from './song';
 import User from './user';
 import QueuedSong from './queued-song';
+import PlaylistRequest from '@entities/playlist-request';
+import Platform from '@entities/platform';
 
 export {
   SpotifyAccountConfig,
@@ -12,6 +14,8 @@ export {
   Song,
   User,
   QueuedSong,
+  PlaylistRequest,
+  Platform,
 };
 
 const entities = [
@@ -21,6 +25,8 @@ const entities = [
   Song,
   User,
   QueuedSong,
+  PlaylistRequest,
+  Platform,
 ];
 
 export default entities;

@@ -14,6 +14,7 @@ import { SongsModule } from '@modules/songs/songs.module';
 import { SchedulerModule } from '@modules/scheduler/scheduler.module';
 import CoreModule from '@modules/core/core.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { PlatformModule } from '@modules/platform/platform.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     QueuedSongsModule,
     SongsModule,
     SchedulerModule,
+    PlatformModule,
   ],
   providers: [
     {

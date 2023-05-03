@@ -15,6 +15,7 @@ import { SchedulerModule } from '@modules/scheduler/scheduler.module';
 import CoreModule from '@modules/core/core.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PlatformModule } from '@modules/platform/platform.module';
+import HealthController from './health.controller';
 
 @Module({
   imports: [
@@ -54,5 +55,6 @@ import { PlatformModule } from '@modules/platform/platform.module';
       useClass: RolesGuard,
     },
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}

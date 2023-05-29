@@ -126,15 +126,10 @@ export default class SpotifyApiService {
   }
 
   public async doWhatever() {
-    const { body } = await this.spotifyWebApi.getTrack(
-      '2qqPOFjYjwGuJhCj3tnIkx',
+    const { body } = await this.spotifyWebApi.getArtistRelatedArtists(
+      '6wWVKhxIU2cEi0K81v7HvP',
     );
-    const { body: bodyArtist } = await this.spotifyWebApi.getArtist(
-      body.artists[0].id,
-    );
-    console.log(bodyArtist);
-    // const { body } = await this.spotifyWebApi.searchTracks('Love Yourself');
-    // console.log(body.tracks.items[0]);
+    console.log(body);
   }
 
   public async getArtistById(artistId: string) {

@@ -18,4 +18,10 @@ export default class SpotifyController {
   public createPlaylist() {
     this.spotifyApiService.doWhatever();
   }
+
+  @Get('test')
+  @Public()
+  public tryStuff() {
+    this.spotifyApiService.doWhatever();
+  }
 }

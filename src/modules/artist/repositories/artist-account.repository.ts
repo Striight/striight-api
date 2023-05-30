@@ -1,11 +1,11 @@
 import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import ArtistAccount from '@entities/artist-account';
+import ArtistAccount from '@entities/striight/artist-account';
 import BaseRepository from '@common/BaseRepository';
+import { InjectStriightRepository } from '@decorators/inject-db-repository';
 
 export default class ArtistAccountRepository extends BaseRepository<ArtistAccount> {
   constructor(
-    @InjectRepository(ArtistAccount)
+    @InjectStriightRepository(ArtistAccount)
     repository: Repository<ArtistAccount>,
   ) {
     super(repository);

@@ -4,12 +4,12 @@ import ArtistAccountRepository from '@modules/artist/repositories/artist-account
 import NoArtistException from '@exceptions/NoArtistException';
 import SongsRepository from '@modules/songs/songs.repository';
 import { RuntimeException } from '@nestjs/core/errors/exceptions';
-import Song from '@entities/song';
+import Song from '@entities/striight/song';
 import { extractSpotifyIdFromURI, identifyUri } from '@utils/song-uri.utils';
 import { Platform, SPOTIFY } from '@constants/platform';
-import ArtistAccount from '@entities/artist-account';
+import ArtistAccount from '@entities/striight/artist-account';
 import SpotifyApiService from '@modules/spotify/services/spotify-api.service';
-import User from '@entities/user';
+import User from '@entities/striight/user';
 import UsersService from '@modules/user/services/users.service';
 
 @Injectable()

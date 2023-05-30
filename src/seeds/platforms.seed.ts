@@ -1,6 +1,8 @@
-import { DataSource } from 'typeorm';
-import Platform from '@entities/platform';
+import Platform from '@entities/striight/platform';
 import { APPLE_MUSIC, SPOTIFY } from '@constants/platform';
+import { INestApplication } from '@nestjs/common';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { STRIIGHT_DB } from '@constants/database';
 
 const SPOTIFY_ITEM = {
   name: SPOTIFY,
@@ -14,10 +16,8 @@ const APPLE_MUSIC_ITEM = {
 
 const Platforms = [SPOTIFY_ITEM, APPLE_MUSIC_ITEM];
 
-export const runSeedServices = async (
-  connection: DataSource,
-): Promise<void> => {
-  const serviceRepository = connection.getRepository(Platform);
+export const runSeedServices = async (app: INestApplication): Promise<void> => {
+  const serviceRepository = app.get(getRepositoryToken(Platform, STRIIGHT_DB));
 
   for (const platformData of Platforms) {
     const existingPlatform = await serviceRepository.findOneBy({

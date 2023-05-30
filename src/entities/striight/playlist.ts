@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import Platform from '@entities/platform';
+import Platform from '@entities/striight/platform';
 
 @Entity('playlists')
 export default class Playlist {

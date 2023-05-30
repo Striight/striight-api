@@ -26,7 +26,8 @@
       "@metadata/*": ["src/metadata/*"],
       "@modules/*": ["src/modules/*"],
       "@utils/*": ["src/utils/*"],
-      "@exceptions/*": ["src/exceptions/*"]
+      "@exceptions/*": ["src/exceptions/*"],
+      "@decorators/*": ["src/decorators/*"]
     }
   }
 }

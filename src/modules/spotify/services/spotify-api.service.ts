@@ -6,7 +6,7 @@ import CryptoService from '@modules/core/services/crypto.service';
 import { ConfigService } from '@nestjs/config';
 import { SPOTIFY_CALLBACK } from '@constants/spotify';
 import SpotifyAccountConfigRepository from '../repositories/spotify-account-config.repository';
-import SpotifyAccountConfig from '@entities/spotify-account-config';
+import SpotifyAccountConfig from '@entities/striight/spotify-account-config';
 import SpotifyNotInitialisedException from '@exceptions/SpotifyNotInitialised.exception';
 import { RuntimeException } from '@nestjs/core/errors/exceptions';
 

@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import User from '@entities/user';
+import User from '@entities/striight/user';
 import UsersRepository from '../repositories/users.repository';
 import { PasswordService } from '@modules/core/services/password.service';
 import { JwtService } from '@nestjs/jwt';

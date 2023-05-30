@@ -6,10 +6,10 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Song from '@entities/song';
+import Song from '@entities/striight/song';
 import { PENDING, Status } from '@constants/queued-song-status';
-import User from '@entities/user';
-import Playlist from '@entities/playlist';
+import User from '@entities/striight/user';
+import Playlist from '@entities/striight/playlist';
 
 @Entity('queued_songs')
 export default class QueuedSong {

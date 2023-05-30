@@ -6,7 +6,7 @@ import ArtistAccountRepository from '@modules/artist/repositories/artist-account
 import { RuntimeException } from '@nestjs/core/errors/exceptions';
 import SongsRepository from '@modules/songs/songs.repository';
 import UsersService from '@modules/user/services/users.service';
-import QueuedSong from '@entities/queued-song';
+import QueuedSong from '@entities/striight/queued-song';
 
 @Injectable()
 export class QueuedSongsService {

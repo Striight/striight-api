@@ -1,10 +1,12 @@
 import BaseRepository from '@common/BaseRepository';
-import Song from '@entities/song';
-import { InjectRepository } from '@nestjs/typeorm';
+import Song from '@entities/striight/song';
 import { Repository } from 'typeorm';
+import { InjectStriightRepository } from '@decorators/inject-db-repository';
 
 export default class SongsRepository extends BaseRepository<Song> {
-  constructor(@InjectRepository(Song) songRepository: Repository<Song>) {
+  constructor(
+    @InjectStriightRepository(Song) songRepository: Repository<Song>,
+  ) {
     super(songRepository);
   }
 }

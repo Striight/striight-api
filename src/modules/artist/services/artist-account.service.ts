@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import ArtistAccountRepository from '../repositories/artist-account.repository';
 import SpotifyApiService from '../../spotify/services/spotify-api.service';
-import ArtistAccount from '@entities/artist-account';
+import ArtistAccount from '@entities/striight/artist-account';
 import UsersRepository from '@modules/user/repositories/users.repository';
 import { extractSpotifyIdFromURI } from '@utils/song-uri.utils';
 import { Log } from '../../../log';

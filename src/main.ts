@@ -6,6 +6,9 @@ import RuntimeExceptionFilter from './filters/RuntimeExceptionFilter';
 import { HttpExceptionFilter } from './filters/HttpExceptionFilter';
 import { DataSource } from 'typeorm';
 import { runSeedServices } from './seeds/platforms.seed';
+import { getConnectionToken, getRepositoryToken } from '@nestjs/typeorm';
+import { STRIIGHT_DB } from '@constants/database';
+import { Platform } from '@entities/striight';
 // import { Log } from './log';
 
 async function bootstrap() {
@@ -13,8 +16,7 @@ async function bootstrap() {
     //TODO: Improve the logs as they don't show the stack traces
     // logger: new Log(),
   });
-  const connection = app.get(DataSource);
-  await runSeedServices(connection);
+  await runSeedServices(app);
 
   const config = new DocumentBuilder()
     .setTitle('Striight API')

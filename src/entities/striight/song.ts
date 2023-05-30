@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import ArtistAccount from '@entities/artist-account';
+import ArtistAccount from '@entities/striight/artist-account';
 
 @Entity('songs')
 export default class Song {

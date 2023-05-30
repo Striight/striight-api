@@ -4,8 +4,8 @@ import Playlist from './playlist';
 import Song from './song';
 import User from './user';
 import QueuedSong from './queued-song';
-import PlaylistRequest from '@entities/playlist-request';
-import Platform from '@entities/platform';
+import PlaylistRequest from '@entities/striight/playlist-request';
+import Platform from '@entities/striight/platform';
 
 export {
   SpotifyAccountConfig,

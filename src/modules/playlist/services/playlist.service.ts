@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import PlaylistRepository from '../repositories/playlist.repository';
-import Playlist from '@entities/playlist';
+import Playlist from '@entities/striight/playlist';
 import SpotifyApiService from '@modules/spotify/services/spotify-api.service';
 import { PlatformService } from '@modules/platform/platform.service';
 import { SPOTIFY } from '@constants/platform';

@@ -6,8 +6,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Song from '@entities/song';
-import User from '@entities/user';
+import Song from '@entities/striight/song';
+import User from '@entities/striight/user';
 
 @Entity('artist_accounts')
 export default class ArtistAccount {
